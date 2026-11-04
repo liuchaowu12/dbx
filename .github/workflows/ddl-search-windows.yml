@@ -33,7 +33,8 @@ jobs:
       - name: 构建安装包
         shell: pwsh
         run: |
-          pnpm tauri build --bundles nsis --target x86_64-pc-windows-msvc --config '{"bundle":{"createUpdaterArtifacts":false}}'
+          '{"bundle":{"createUpdaterArtifacts":false}}' | Set-Content -LiteralPath src-tauri/tauri.local-build.conf.json
+          pnpm tauri build --bundles nsis --target x86_64-pc-windows-msvc --config src-tauri/tauri.local-build.conf.json
       - name: 验证并整理产物
         shell: pwsh
         run: |
